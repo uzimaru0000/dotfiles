@@ -1,28 +1,37 @@
 if &compatible
     set nocompatible
 endif
-set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-call dein#begin(expand('~/.vim/dein'))
+if dein#load_state('~/.cache/dein')
+  call dein#begin('~/.cache/dein')
 
-call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('Shougo/deoplete.nvim')
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
 
-call dein#add('Shougo/neocomplete.vim')
-call dein#add('Shougo/neomru.vim')
-call dein#add('Shougo/neosnippet')
-call dein#add('sickill/vim-monokai')
-call dein#add('tomasr/molokai')
-call dein#add('fatih/vim-go')
-call dein#add('NoahOrberg/castOfArrow.vim')
-call dein#add('dag/vim-fish')
-call dein#add('leafgarland/typescript-vim')
-call dein#add('ElmCast/elm-vim')
-call dein#add('scrooloose/nerdtree')
-call dein#add('kana/vim-submode')
+    call dein#add('Shougo/dein.vim')
+    call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 
-call dein#end()
-call dein#save_state()
+    call dein#add('Shougo/neocomplete.vim')
+    call dein#add('Shougo/neomru.vim')
+    call dein#add('Shougo/neosnippet')
+    call dein#add('sickill/vim-monokai')
+    call dein#add('tomasr/molokai')
+    call dein#add('fatih/vim-go')
+    call dein#add('dag/vim-fish')
+    call dein#add('leafgarland/typescript-vim')
+    call dein#add('ElmCast/elm-vim')
+    call dein#add('scrooloose/nerdtree')
+    call dein#add('kana/vim-submode')
+    call dein#add('elixir-editors/vim-elixir')
+
+  call dein#end()
+  call dein#save_state()
+endif
 
 filetype plugin indent on
 syntax enable
@@ -69,7 +78,11 @@ nnoremap k gk
 set nowrap
 " カラースキーム
 colorscheme monokai
-" フォント
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight LineNr ctermbg=none
+highlight Folded ctermbg=none
+highlight EndOfBuffer ctermbg=none
 
 " Tab系
 " Tab文字を半角スペース
