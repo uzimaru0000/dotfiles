@@ -1,0 +1,68 @@
+"*":
+  Zen:
+    minimap: true
+    showWordCount: "Left"
+    tabs: "multiple"
+    typewriter: true
+    width: 100
+  "activate-power-mode":
+    particles: {}
+    playAudio: {}
+    plugins:
+      playAudio: true
+      screenShake: true
+  "atom-ide-ui":
+    "atom-ide-code-format":
+      formatOnSave: true
+  "atom-package-deps":
+    ignored: [
+      "linter-ui-default"
+    ]
+  codic:
+    accessToken: "k0X6YzzD9z3PEaRg9bIoTMddYf7jH8xJzm"
+  core:
+    closeDeletedFileTabs: true
+    disabledPackages: [
+      "activate-power-mode"
+      "linter-elm-make"
+      "language-csharp"
+    ]
+    telemetryConsent: "no"
+    themes: [
+      "one-dark-ui"
+      "monokai"
+    ]
+    titleBar: "custom-inset"
+  editor:
+    fontFamily: "Fira Code"
+    fontSize: 17
+    scrollPastEnd: true
+    showIndentGuide: true
+    tabLength: 4
+    tabType: "soft"
+  "elm-format":
+    binary: "/Users/oba/.nvm/versions/node/v8.9.3/bin/elm-format"
+  elmjutsu:
+    cacheDirectory: "/var/folders/81/bbl2sg2510j2t600h9m_gjgw0000gn/T/elmjutsu10061gy10BuGYu255"
+    globalAutocompleteEnabled: true
+  "exception-reporting":
+    userId: "f5fb0cd2-6b39-81f8-fa1b-a4f50c70311e"
+  "language-elm":
+    autocompleteEnabled: false
+  "linter-elm-make":
+    elmMakeExecutablePath: "elm make"
+    elmPackageExecutablePath: "elm-stuff"
+  "linter-ui-default":
+    panelHeight: 300
+  "markdown-preview": {}
+  minimap: {}
+  "omnisharp-atom":
+    codeLens: false
+    enhancedHighlighting19: false
+  "vim-mode": {}
+  welcome:
+    showOnStartup: false
+".csx.omnisharp.source":
+  editor:
+    autoIndent: false
+    autoIndentOnPaste: false
