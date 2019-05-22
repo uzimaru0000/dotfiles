@@ -11,61 +11,61 @@ module.exports = {
     fontFamily: '"Ricty Diminished"',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(248,28,229,0.8)',
+    cursorColor: "rgba(248,28,229,0.8)",
 
     // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
-    cursorShape: 'BLOCK',
+    cursorShape: "BLOCK",
 
     // set to true for blinking cursor
     cursorBlink: true,
 
     // color of the text
-    foregroundColor: '#eee',
+    foregroundColor: "#eee",
 
     // terminal background color
-    backgroundColor: '#444',
+    backgroundColor: "#444",
 
     // border color (window, tabs)
-    borderColor: '#555',
+    borderColor: "#444",
 
     // custom css to embed in the main window
-    css: '',
+    css: "",
 
     // custom css to embed in the terminal window
-    termCSS: '',
+    termCSS: "",
 
     // set to `true` (without backticks) if you're using a Linux setup that doesn't show native menus
     // default: `false` on Linux, `true` on Windows (ignored on macOS)
-    showHamburgerMenu: '',
+    showHamburgerMenu: "",
 
     // set to `false` if you want to hide the minimize, maximize and close buttons
     // additionally, set to `'left'` if you want them on the left, like in Ubuntu
     // default: `true` on windows and Linux (ignored on macOS)
-    showWindowControls: '',
+    showWindowControls: "",
 
     // custom padding (css format, i.e.: `top right bottom left`)
-    padding: '12px 14px',
+    padding: "12px 14px",
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
     // an array here instead of a color map object
     colors: {
-      black: '#000000',
-      red: '#ff0000',
-      green: '#33ff00',
-      yellow: '#ffff00',
-      blue: '#0066ff',
-      magenta: '#cc00ff',
-      cyan: '#00ffff',
-      white: '#d0d0d0',
-      lightBlack: '#808080',
-      lightRed: '#ff0000',
-      lightGreen: '#33ff00',
-      lightYellow: '#ffff00',
-      lightBlue: '#0066ff',
-      lightMagenta: '#cc00ff',
-      lightCyan: '#00ffff',
-      lightWhite: '#ffffff'
+      black: "#000000",
+      red: "#ff0000",
+      green: "#33ff00",
+      yellow: "#ffff00",
+      blue: "#0066ff",
+      magenta: "#cc00ff",
+      cyan: "#00ffff",
+      white: "#d0d0d0",
+      lightBlack: "#808080",
+      lightRed: "#ff0000",
+      lightGreen: "#33ff00",
+      lightYellow: "#ffff00",
+      lightBlue: "#0066ff",
+      lightMagenta: "#cc00ff",
+      lightCyan: "#00ffff",
+      lightWhite: "#ffffff"
     },
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
@@ -73,17 +73,17 @@ module.exports = {
     // make sure to use a full path if the binary name doesn't work
     // (e.g `C:\\Windows\\System32\\bash.exe` instead of just `bash.exe`)
     // if you're using powershell, make sure to remove the `--login` below
-    shell: '',
+    shell: "",
 
     // for setting shell arguments (i.e. for using interactive shellArgs: ['-i'])
     // by default ['--login'] will be used
-    shellArgs: ['--login'],
+    shellArgs: ["--login"],
 
     // for environment variables
     env: {},
 
     // set to false for no bell
-    bell: 'SOUND',
+    bell: "SOUND",
 
     // if true, selected text will automatically be copied to the clipboard
     copyOnSelect: false,
@@ -97,45 +97,21 @@ module.exports = {
 
     // for advanced config flags please refer to https://hyper.is/#cfg
     opacity: 0.9,
-    paneNavigation: {
-      debug: false,
-      hotkeys: {
-        navigation: {
-          up: 'ctrl+alt+up',
-          down: 'ctrl+alt+down',
-          left: 'ctrl+alt+left',
-          right: 'ctrl+alt+right'
-        },
-        jump_prefix: 'ctrl+alt', // completed with 1-9 digits
-        permutation_modifier: 'shift', // Added to jump and navigation hotkeys for pane permutation
-        maximize: 'meta+enter'
-      },
-      showIndicators: true, // Show pane number
-      indicatorPrefix: '^⌥', // Will be completed with pane number
-      indicatorStyle: { // Added to indicator <div>
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        fontSize: '10px'
-      },
-      focusOnMouseHover: false,
-      inactivePaneOpacity: 0.6 // Set to 1 to disable inactive panes dimming
-    },
     tabIcons: {
       activeStyle: {
-        display: 'inline-block',
-        marginRight: '0.25rem',
-        transition: 'opacity 200ms ease-in',
-        verticalAlign: 'middle',
-        width: '1rem'
+        display: "inline-block",
+        marginRight: "0.25rem",
+        transition: "opacity 200ms ease-in",
+        verticalAlign: "middle",
+        width: "1rem"
       },
       inactiveStyle: {
-        display: 'inline-block',
-        marginRight: '0.25rem',
-        transition: 'opacity 200ms ease-in',
-        verticalAlign: 'middle',
-        width: '1rem',
-        opacity: 0.3,
+        display: "inline-block",
+        marginRight: "0.25rem",
+        transition: "opacity 200ms ease-in",
+        verticalAlign: "middle",
+        width: "1rem",
+        opacity: 0.3
       }
     }
   },
@@ -147,11 +123,10 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-    'hyper-material-theme',
-    'hyper-statusline',
+    "hyper-material-theme",
+    "hyper-statusline",
     "hyper-opacity",
     "hypercwd",
-    "hyper-pane",
     "hyper-tab-icons"
   ],
 

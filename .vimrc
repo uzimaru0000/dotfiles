@@ -27,7 +27,8 @@ if dein#load_state('~/.cache/dein')
     call dein#add('ElmCast/elm-vim')
     call dein#add('scrooloose/nerdtree')
     call dein#add('kana/vim-submode')
-    call dein#add('elixir-editors/vim-elixir')
+    call dein#add('editorconfig/editorconfig-vim')
+    call dein#add('prettier/vim-prettier')
 
   call dein#end()
   call dein#save_state()
@@ -88,8 +89,8 @@ highlight EndOfBuffer ctermbg=none
 " Tab文字を半角スペース
 set expandtab
 " スペースいくつ分か
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 
 " 検索系
 " 検索が最後まで行ったら最初に戻る

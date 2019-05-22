@@ -1,0 +1,21 @@
+bind main   H   ?git reset --hard %(commit)
+bind diff   H   ?git reset --hard %(commit)
+bind refs   H   ?git reset --hard %(branch)
+bind status H   ?git reset --hard HEAD
+
+bind main   R   ?git rebase -i %(commit)~
+bind diff   R   ?git rebase -i %(commit)~
+
+bind main   S   ?git reset --soft %(commit)
+bind diff   S   ?git reset --soft %(commit)
+bind refs   S   ?git reset --soft %(branch)
+
+bind main   T   ?git tag "%(prompt Enter tag name: )" %(commit)
+bind refs   T   ?git tag "%(prompt Enter tag name: )" %(branch)
+
+bind refs   B   ?git checkout -b "%(prompt Enter branch name: )"
+
+bind main   G   !@hub browse -- commit/%(commit)
+bind diff   G   !@hub browse -- commit/%(commit)
+
+bind main   C   ?git checkout %(commit)
