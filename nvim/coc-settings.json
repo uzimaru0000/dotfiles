@@ -1,0 +1,13 @@
+{
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.noselect": false,
+  "suggest.minTriggerInputLength": 2,
+  "suggest.acceptSuggestionOnCommitCharacter": true,
+  "suggest.snippetIndicator": " ►",
+  "suggest.enablePreview": true,
+  "coc.preferences.hoverTarget": "float",
+  "coc.preferences.diagnostic.displayByAle": true,
+  "list.autoResize": true,
+  "languageserver": {
+  }
+}

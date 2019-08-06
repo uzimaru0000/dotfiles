@@ -1,0 +1,19 @@
+[user]
+	name = Shuji Oba
+	email = shuji365630@gmail.com
+[core]
+	editor = nvim -f
+	excludesfile = /Users/oba/.gitignore_global
+[color]
+	ui = auto
+[commit]
+	template = /Users/uzimaru0000/.commit_template
+[alias]
+	a = add
+    c = commit
+
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

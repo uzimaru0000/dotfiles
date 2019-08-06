@@ -1,0 +1,22 @@
+{
+  "breadcrumbs.enabled": true,
+  "editor.fontSize": 18,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "window.zoomLevel": 0,
+  "workbench.colorTheme": "Monokai",
+  "editor.tabSize": 2,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "java.errors.incompleteClasspath.severity": "ignore",
+  "java.configuration.checkProjectSettingsExclusions": false,
+  "editor.formatOnSave": true,
+  "[vue]": {
+    "editor.formatOnSave": false
+  },
+  "[elm]": {
+    "editor.defaultFormatter": "sbrink.elm"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.iconTheme": "material-icon-theme"
+}

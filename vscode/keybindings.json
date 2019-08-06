@@ -1,0 +1,23 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "cmd+n",
+    "command": "explorer.newFile"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    "key": "alt+cmd+right",
+    "command": "-workbench.action.nextEditor"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.previousEditor"
+  },
+  {
+    "key": "alt+cmd+left",
+    "command": "-workbench.action.previousEditor"
+  }
+]

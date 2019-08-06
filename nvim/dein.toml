@@ -1,0 +1,93 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+
+[[plugins]]
+repo = 'joshdick/onedark.vim'
+hook_add = '''
+  colorscheme onedark
+'''
+
+[[plugins]]
+repo = 'w0rp/ale'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+  set signcolumn=yes
+  set updatetime=1000
+  nnoremap [gitgutter] <Nop>
+  nmap <C-h> [gitgutter]
+  nmap [gitgutter]j <Plug>GitGutterNextHunk
+  nmap [gitgutter]k <Plug>GitGutterPrevHunk
+  nmap [gitgutter]u <Plug>GitGutterUndoHunk
+'''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_add = '''
+  command Gst :Gstatus
+  command Gdf :Gdiff
+  command Gbl :Gblame
+'''
+
+[[plugins]]
+repo = 'osyo-manga/vim-anzu'
+hook_add = '''
+  nmap n <Plug>(anzu-n-with-echo)
+  nmap N <Plug>(anzu-N-with-echo)
+  nmap * <Plug>(anzu-star)
+  nmap # <Plug>(anzu-sharp)
+'''
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+build = 'coc#util#install()'
+hook_add = '''
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  " Remap for rename current word
+  nmap <leader>rn <Plug>(coc-rename)
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " Use K for show documentation in preview window
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if &filetype == 'vim'
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+'''
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+  nnoremap <silent><C-r> :NERDTreeToggle<CR>
+'''
+
+[[plugins]]
+repo = 'ElmCast/elm-vim'
+hook_add = '''
+  let g:elm_setup_keybindings = 0
+  let g:elm_format_autosave = 0
+  let g:elm_jump_to_error = 0
+'''
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+hook_add = '''
+  let g:typescript_indent_disable = 1
+'''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
