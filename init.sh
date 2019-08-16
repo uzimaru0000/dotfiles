@@ -98,7 +98,7 @@ clone_or_update_repo() {
     echo 'done'
   elif ! [ -d "$DOTFILES_PATH" ]; then
     echo 'Cloning repo...'
-    git clone --recursive git://github.com/creasty/dotfiles.git --branch $DOTFILES_BRANCH $DOTFILES_PATH
+    git clone --recursive git://github.com/uzimaru0000/dotfiles.git --branch $DOTFILES_BRANCH $DOTFILES_PATH
     echo 'done'
   fi
 }
@@ -151,7 +151,7 @@ main() {
   clone_or_update_repo
   check_xcode_license_approved
   install_homebrew
-  ./deploy.sh
+  $DOTFILES_PATH/deploy.sh
 }
 
 main
