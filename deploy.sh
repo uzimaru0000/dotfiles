@@ -12,7 +12,7 @@ args_from_env() {
   do
     eval key=$key
     eval value=$value
-    eval "$2 $key $value"
+    eval "$2 $DOTFILES_PATH/$key $value"
   done
 }
 
