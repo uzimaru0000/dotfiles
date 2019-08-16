@@ -3,7 +3,7 @@
 set -eu
 set -o pipefail
 
-: ${DOTFILES_PATH:="$HOME/Documents/dotfiles"}
+: ${DOTFILES_PATH:="$HOME/dotfiles"}
 : ${DOTFILES_BRANCH:=master}
 
 ARGS=('')
