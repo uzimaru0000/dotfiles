@@ -1,5 +1,5 @@
 [user]
-	name = Shuji Oba
+	name = ShujiOba
 	email = shuji365630@gmail.com
 [core]
 	editor = nvim -f
@@ -10,7 +10,7 @@
 	template = /Users/uzimaru0000/.commit_template
 [alias]
 	a = add
-    c = commit
+	c = commit
 
 [filter "lfs"]
 	process = git-lfs filter-process

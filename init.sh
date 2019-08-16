@@ -145,30 +145,13 @@ install_homebrew() {
   echo 'done'
 }
 
-install_ansible() {
-  command -v 'ansible' > /dev/null 2>&1 && return
-
-  echo 'Installing ansible...'
-  brew install ansible
-  echo 'done'
-}
-
-run_provisioning() {
-  echo 'Provisioning...'
-  $DOTFILES_PATH/provisioning/run.sh ${ARGS[@]}
-  echo 'done'
-}
-
 main() {
   print_header
   check_os
   clone_or_update_repo
   check_xcode_license_approved
   install_homebrew
-  install_ansible
-  run_provisioning
+  ./deploy.sh
 }
 
 main
-
-
