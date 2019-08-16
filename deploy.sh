@@ -12,7 +12,7 @@ args_from_env() {
   do
     eval key=$key
     eval value=$value
-    eval "$2 $DOTFILES_PATH/$key $value"
+    eval "$2 $key $value"
   done
 }
 
@@ -29,7 +29,6 @@ link_dotfiles() {
 }
 
 install_from_brew() {
-  brew update
   if [ $2 -eq 0 ]; then
     eval brew install $1
   else
@@ -39,8 +38,16 @@ install_from_brew() {
 
 main() {
   echo -e 'Provisioning...\n'
+
+  echo 'Create SymbolickLinks...'
   args_from_env "$DOTFILES_PATH/links.env" "link_dotfiles"
+
+  echo "install application from homebrew"
+  echo "brew update..."
+  brew update
+  echo "done"
   args_from_env "$DOTFILES_PATH/brew.env" "install_from_brew"
+
   echo -e '\ndone'
 }
 
