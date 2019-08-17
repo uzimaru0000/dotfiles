@@ -37,18 +37,22 @@ install_from_brew() {
 }
 
 main() {
-  echo -e 'Provisioning...\n'
+  echo '<Provisioning>'
 
-  echo 'Create SymbolickLinks...'
+  echo '<Create-SymbolickLinks>'
   args_from_env "$DOTFILES_PATH/links.env" "link_dotfiles"
+  echo '</Create-SymbolickLinks>'
 
-  echo "install application from homebrew"
-  echo "brew update..."
+  echo '<Install-Application from="homebrew">'
+  echo "<Brew-Update>"
   brew update
-  echo "done"
+  echo "</Brew-Update>"
+  echo "<Brew-Install>"
   args_from_env "$DOTFILES_PATH/brew.env" "install_from_brew"
+  echo "</Brew-Install>"
+  echo "</Install-Application>"
 
-  echo -e '\ndone'
+  echo '</Provisioning>'
 }
 
 main
