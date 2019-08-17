@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-: ${DOTFILES_PATH:="$HOME/Documents/dotfiles"}
+: ${DOTFILES_PATH:="$HOME/.dotfiles"}
 
 args_from_env() {
   if [ ! -e $1 ]; then
@@ -19,10 +19,10 @@ args_from_env() {
 link_dotfiles() {
   for f in `ls -a $1 | grep -E "[^\.]"`
   do 
-    if [ -d "$DOTFILES_PATH/$1/$f" ]; then
+    if [ -d "$1/$f" ]; then
       link_dotfiles "$1/$f" "$2/$f"
     else
-      ln -snfv "$DOTFILES_PATH/$1/$f" "$2/$f"
+      ln -snfv "$1/$f" "$2/$f"
     fi
 
   done
