@@ -16,16 +16,22 @@ args_from_env() {
   done
 }
 
-link_dotfiles() {
-  for f in `ls -a $1 | grep -E "[^\.]"`
-  do 
-    if [ -d "$1/$f" ]; then
-      link_dotfiles "$1/$f" "$2/$f"
-    else
-      ln -snfv "$1/$f" "$2/$f"
-    fi
+indent() {
+    local n="${1:-4}"
+    local p=""
+    for i in `seq 1 $n`; do
+        p="$p "
+    done;
 
-  done
+    local c="s/^/$p/"
+    case $(uname) in
+      Darwin) sed -l "$c";;
+      *)      sed -u "$c";;
+    esac
+}
+
+link_dotfiles() {
+  ln -snfv "$1" "$2"
 }
 
 install_from_brew() {
@@ -39,18 +45,18 @@ install_from_brew() {
 main() {
   echo '<Provisioning>'
 
-  echo '<Create-SymbolickLinks>'
-  args_from_env "$DOTFILES_PATH/links.env" "link_dotfiles"
-  echo '</Create-SymbolickLinks>'
+  echo '<Create-SymbolickLinks>' | indent
+  args_from_env "$DOTFILES_PATH/links.env" "link_dotfiles" | indent 8
+  echo '</Create-SymbolickLinks>' | indent
 
-  echo '<Install-Application from="homebrew">'
-  echo "<Brew-Update>"
-  brew update
-  echo "</Brew-Update>"
-  echo "<Brew-Install>"
-  args_from_env "$DOTFILES_PATH/brew.env" "install_from_brew"
-  echo "</Brew-Install>"
-  echo "</Install-Application>"
+  echo '<Install-Application from="homebrew">' | indent
+  echo "<Brew-Update>" | indent 8
+  brew update | indent 12
+  echo "</Brew-Update>" | indent 8
+  echo "<Brew-Install>" | indent 8
+  args_from_env "$DOTFILES_PATH/brew.env" "install_from_brew" | indent 12
+  echo "</Brew-Install>" | indent 8
+  echo "</Install-Application>" | indent
 
   echo '</Provisioning>'
 }
