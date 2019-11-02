@@ -16,5 +16,6 @@ fish_vi_key_bindings
 
 alias l='ls'
 alias vim='nvim'
+alias dia='vim ~/Documents/diary/(date "+%Y/%m/%d.md")'
 funcsave vim
 
