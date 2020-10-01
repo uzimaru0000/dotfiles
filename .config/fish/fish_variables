@@ -1,13 +1,10 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR ZO_CMD:zo
-SETUVAR Z_CMD:z
-SETUVAR Z_DATA:/Users/uzimaru0000/\x2elocal/share/z/data
-SETUVAR Z_DATA_DIR:/Users/uzimaru0000/\x2elocal/share/z
-SETUVAR Z_EXCLUDE:/Users/uzimaru0000
+SETUVAR Z_DATA_DIR:/Users/uzimaru/\x2elocal/share/z
 SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d
+SETUVAR __fish_initialized:2398
 SETUVAR fish_color_autosuggestion:969896
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:b294bb
