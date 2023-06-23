@@ -1,10 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
-	name = uzimaru
-	email = uzimaru@pixiv.co.jp
-# Please adapt and uncomment the following lines:
-#	name = uzimaru0000
-#	email = shuji365630@gmail.com
+	name = uzimaru0000
+	email = shuji365630@gmail.com
 [core]
 	editor = nvim
 [alias]
