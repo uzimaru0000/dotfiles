@@ -15,10 +15,10 @@ status --is-interactive; and source (nodenv init -|psub)
 set -x LIBRARY_PATH $LIBRARY_PATH (brew --prefix)/lib
 set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk@11/include"
 
-set -gx PNPM_HOME "/Users/uzimaru/Library/pnpm"
+set -gx PNPM_HOME "~/Library/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
-set -gx PATH "/Users/uzimaru/.deno/bin" $PATH
-set -gx PATH "/Users/uzimaru/.local/bin" $PATH
+set -gx PATH "~/.deno/bin" $PATH
+set -gx PATH "~/.local/bin" $PATH
 
 fish_vi_key_bindings
 fish_user_key_bindings

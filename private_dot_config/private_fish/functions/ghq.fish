@@ -8,3 +8,5 @@ function __ghq_cd_repository -d "Change local repository directory"
     commandline -f repaint
 end
 
+alias gcd="__ghq_cd_repository"
+
