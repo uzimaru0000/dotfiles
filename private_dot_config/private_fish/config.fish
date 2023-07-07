@@ -15,10 +15,10 @@ status --is-interactive; and source (nodenv init -|psub)
 set -x LIBRARY_PATH $LIBRARY_PATH (brew --prefix)/lib
 set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk@11/include"
 
-set -gx PNPM_HOME "~/Library/pnpm"
-set -gx PATH "$PNPM_HOME" $PATH
-set -gx PATH "~/.deno/bin" $PATH
-set -gx PATH "~/.local/bin" $PATH
+set -gx PNPM_HOME $HOME/Library/pnpm
+set -gx PATH $PNPM_HOME $PATH
+set -gx PATH $HOME/.deno/bin $PATH
+set -gx PATH $HOME/.local/bin $PATH
 
 fish_vi_key_bindings
 fish_user_key_bindings
@@ -33,11 +33,7 @@ alias sed='gsed'
 
 starship init fish | source
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/uzimaru/google-cloud-sdk/path.fish.inc' ]; . '/Users/uzimaru/google-cloud-sdk/path.fish.inc'; end
-
 source ~/.config/fish/functions/ghq.fish
-
 
 # pnpm
 set -gx PNPM_HOME "/Users/uzimaru/Library/pnpm"
