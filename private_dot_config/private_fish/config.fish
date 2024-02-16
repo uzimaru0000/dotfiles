@@ -40,3 +40,9 @@ set -gx PNPM_HOME "/Users/uzimaru/Library/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
 
+# pyenv
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+source /opt/homebrew/opt/asdf/libexec/asdf.fish
+
