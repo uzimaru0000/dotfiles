@@ -48,6 +48,7 @@ cd "$DOTFILES_DIR"
 make stow
 
 # Install packages
+brew update
 brew bundle --file=~/.Brewfile
 
 # Apply macOS system preferences
