@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+
+function git-review() {
+    git status > /dev/null 2> /dev/null
+
+    # not git repository
+    if [ $? = '128' ]; then
+        echo "fatal: not a git repository (or any of the parent directories): .git" 1>&2
+        exit 128
+    fi
+
+    list=`gh pr list --json number,title,headRefName`
+    result=`echo $list | jq 'map({ number: .number, title: .title })' | tv --no-headers --style plane | sk | awk '{ print $1; }'`
+
+    if [ $? = '130' ]; then
+        exit 1
+    fi
+
+    branch=`echo $list | jq -r ".[] | select(.number == $result) | .headRefName" | head`
+
+    ghq_root=`ghq root`
+    safe_branch=$(echo "$branch" | sed 's|/|-|g')
+    worktree_dir="$ghq_root/pr-$result-$safe_branch"
+    
+    if [ -d $worktree_dir ]; then
+        echo $worktree_dir
+        exit 0
+    fi
+
+    git fetch origin "$branch" && git worktree add -b "$branch" "$worktree_dir" "origin/$branch"
+
+    echo $worktree_dir
+}
+
+git-review $@
+

@@ -1,0 +1,43 @@
+#!/usr/bin/env zsh
+
+title=""
+description=""
+sound=""
+
+while getopts "t:d:s:" opt; do
+	case $opt in
+		t)
+			title=$OPTARG
+			;;
+		d)
+			description=$OPTARG
+			;;
+		s)
+			if [[ -z $OPTARG ]]; then
+				sound="Ping"
+			else
+				sound=$OPTARG
+			fi
+			;;
+		\?)
+			echo "Usage: $0 -t <title> -d <description> [-s <sound>]" >&2
+			exit 1
+			;;
+	esac
+done
+
+if [[ -z $title || -z $description ]]; then
+	echo "Error Both title (-t) and description (-d) are required." >&2
+	exit 1
+fi
+
+sound_cmd=""
+
+if [[ -n $sound ]]; then
+	sound_cmd="sound name \"$sound\""
+fi
+
+/usr/bin/osascript <<EOF
+display notification "$description" with title "$title" $sound_cmd
+EOF
+

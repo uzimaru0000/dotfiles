@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# API URL
+url="https://lgtmeow.com/api/lgtm-images"
+
+# APIリクエストを送信し、レスポンスを取得
+response=$(curl -s $url)
+
+# jqを使って最初のimageUrlを抽出
+imageUrl=$(echo $response | jq -r '.[0].imageUrl')
+
+# クリップボードにコピーするテキストを作成
+formatted_text="[![LGTMeow]($imageUrl)](https://lgtmeow.com)"
+
+# フォーマットされたテキストをクリップボードにコピー
+echo $formatted_text | pbcopy
+
+# クリップボードにコピーされた内容を表示
+echo "Formatted text has been copied to clipboard: $formatted_text"
+

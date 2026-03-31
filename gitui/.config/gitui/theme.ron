@@ -1,0 +1,22 @@
+(
+    selected_tab: Some(Rgb(143, 188, 187)),        // 選択されたタブの色
+    command_fg: Some(Rgb(235, 203, 139)),          // コマンドの文字色
+    cmdbar_bg: Some(Rgb(46, 52, 64)),              // コマンドバーの背景色
+    cmdbar_extra_lines_bg: Some(Rgb(46, 52, 64)),  // コマンドバーの追加行背景色
+    disabled_fg: Some(Rgb(76, 86, 106)),           // 無効な文字色
+    diff_line_add: Some(Rgb(163, 190, 140)),       // 差分追加行の色
+    diff_line_delete: Some(Rgb(191, 97, 106)),     // 差分削除行の色
+    diff_file_added: Some(Rgb(163, 190, 140)),     // 追加されたファイルの色
+    diff_file_removed: Some(Rgb(191, 97, 106)),    // 削除されたファイルの色
+    diff_file_moved: Some(Rgb(208, 135, 112)),     // 移動されたファイルの色
+    diff_file_modified: Some(Rgb(136, 192, 208)),  // 変更されたファイルの色
+    commit_hash: Some(Rgb(180, 142, 173)),         // コミットハッシュの色
+    commit_time: Some(Rgb(136, 192, 208)),         // コミット時間の色
+    commit_author: Some(Rgb(163, 190, 140)),       // コミット著者の色
+    danger_fg: Some(Rgb(191, 97, 106)),            // 危険な操作の文字色
+    push_gauge_bg: Some(Rgb(76, 86, 106)),         // プッシュゲージの背景色
+    push_gauge_fg: Some(Rgb(163, 190, 140)),       // プッシュゲージの前景色
+    tag_fg: Some(Rgb(208, 135, 112)),              // タグの色
+    branch_fg: Some(Rgb(235, 203, 139)),           // ブランチの色
+    block_title_focused: Some(Rgb(236, 239, 244)), // フォーカスされたブロックタイトルの色
+)

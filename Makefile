@@ -1,0 +1,17 @@
+PACKAGES := git fish starship gh gitui bin brew
+
+.PHONY: all stow unstow restow brew
+
+all: stow
+
+stow:
+	@for pkg in $(PACKAGES); do stow -v $$pkg; done
+
+unstow:
+	@for pkg in $(PACKAGES); do stow -Dv $$pkg; done
+
+restow:
+	@for pkg in $(PACKAGES); do stow -Rv $$pkg; done
+
+brew:
+	brew bundle --no-lock --file=~/.Brewfile

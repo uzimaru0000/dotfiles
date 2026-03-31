@@ -1,0 +1,309 @@
+#!/usr/bin/env zsh
+
+# Git Worktree管理スクリプト
+set -euo pipefail
+
+# カラー定義
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[1;33m'
+readonly BLUE='\033[0;34m'
+readonly NC='\033[0m' # No Color
+
+# アイコン定義
+readonly ICON_FOLDER=""
+readonly ICON_BRANCH=""
+readonly ICON_COMMIT=""
+readonly ICON_CLEAN=""
+readonly ICON_MODIFIED=""
+readonly ICON_FILE=""
+readonly ICON_STAGED=""
+readonly ICON_PUSH=""
+readonly ICON_ERROR=""
+
+# ヘルプメッセージ
+show_help() {
+    cat << EOF
+Git Worktree管理スクリプト
+
+使用法:
+    git wt [command] [options]
+
+コマンド:
+    list, ls           - ワークツリー一覧を表示
+    add [branch]       - 新しいワークツリーを追加 (引数なしで現在のブランチを使用)
+    remove, rm [branch]  - ワークツリーを削除 (引数なしでskでファジーファインディング)
+    switch, sw [branch]  - 指定したワークツリーに移動 (引数なしでskでファジーファインディング)
+    prune             - 削除されたワークツリーをクリーンアップ
+    status            - 全ワークツリーの状態を表示
+    help              - このヘルプを表示
+
+例:
+    git wt add                 # 現在のブランチをワークツリーに追加
+    git wt add feature/new-api # 指定したブランチをワークツリーに追加
+    git wt switch              # skでワークツリーを選択して移動
+    git wt switch feature-new-api
+    git wt remove              # skでワークツリーを選択して削除
+    git wt remove old-feature
+    git wt status
+
+注意:
+    - ブランチ名のスラッシュはハイフンに変換されます (feature/api → feature-api)
+
+EOF
+}
+
+# エラーメッセージ出力
+error() {
+    echo -e "${RED}${ICON_ERROR} $1${NC}" >&2
+    exit 1
+}
+
+# 情報メッセージ出力
+info() {
+    echo -e "${BLUE}$1${NC}"
+}
+
+# 成功メッセージ出力
+success() {
+    echo -e "${GREEN}${ICON_CLEAN} $1${NC}"
+}
+
+# 警告メッセージ出力
+warning() {
+    echo -e "${YELLOW}${ICON_MODIFIED} $1${NC}"
+}
+
+# Gitリポジトリチェック
+check_git_repo() {
+    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+        error "現在のディレクトリはGitリポジトリではありません"
+    fi
+}
+
+# ワークツリーのパスを取得
+get_worktree_path() {
+    local branch=$1
+    local git_root=$(git rev-parse --show-toplevel)
+    local worktrees_dir="$git_root/.git/wt_dir"
+    echo "$worktrees_dir/${branch//\//-}"
+}
+
+# ワークツリー一覧表示
+list_worktrees() {
+    local simple_mode=$1
+    
+    if [[ $simple_mode == "--oneline" ]]; then
+        # fzf用のシンプル表示（ブランチ名のみ）
+        git worktree list --porcelain | while IFS= read -r line; do
+            if [[ $line =~ ^branch ]]; then
+                branch=${line#branch refs/heads/}
+                echo "$branch"
+            fi
+        done
+    else
+        # 通常の詳細表示
+        git worktree list --porcelain | while IFS= read -r line; do
+            if [[ $line =~ ^worktree ]]; then
+                worktree_path=${line#worktree }
+                echo -e "  ${GREEN}${ICON_FOLDER} $worktree_path${NC}"
+            elif [[ $line =~ ^branch ]]; then
+                branch=${line#branch refs/heads/}
+                echo -e "    ${BLUE}${ICON_BRANCH} $branch${NC}"
+            elif [[ $line =~ ^HEAD ]]; then
+                commit=${line#HEAD }
+                echo -e "    ${YELLOW}${ICON_COMMIT} ${commit:0:8}${NC}"
+            elif [[ -z $line ]]; then
+                echo
+            fi
+        done
+    fi
+}
+
+# ワークツリー追加
+add_worktree() {
+    local branch=$1
+
+    if [[ -z $branch ]]; then
+        # 引数がない場合は現在のブランチを使用
+        branch=$(git branch --show-current)
+        if [[ -z $branch ]]; then
+            error "現在のブランチを取得できません (detached HEAD状態の可能性があります)"
+        fi
+        
+        # 現在のブランチが既にワークツリーで使用されているかチェック
+        local current_dir=$(pwd)
+        local current_worktree=$(git worktree list | grep "\[$branch\]" | cut -d' ' -f1)
+        if [[ -n $current_worktree && "$current_worktree" == "$current_dir" ]]; then
+            error "現在のブランチ '$branch' は既に現在のワークツリーで使用されています"
+        fi
+        
+        info "現在のブランチを使用: $branch"
+    fi
+    
+    # ブランチが既に他のワークツリーで使用されているかチェック
+    if git worktree list --porcelain | grep -q "^branch refs/heads/$branch$"; then
+        local existing_path=$(git worktree list | grep "\[$branch\]" | cut -d' ' -f1)
+        error "ブランチ '$branch' は既に別のワークツリーで使用されています: $existing_path"
+    fi
+    
+    # Gitリポジトリのルートディレクトリを取得
+    local git_root=$(git rev-parse --show-toplevel)
+    local worktree_path=$(get_worktree_path "$branch")
+    mkdir -p $(dirname "$worktree_path")
+    
+    info "ワークツリーを追加中: $branch -> $worktree_path"
+    
+    # リモートブランチが存在するかチェック
+    if git show-ref --verify --quiet "refs/remotes/origin/$branch" || git show-ref --verify --quiet "refs/heads/$branch"; then
+        git worktree add "$worktree_path" "$branch"
+    else
+        # 新しいブランチとして作成
+        git worktree add -b "$branch" "$worktree_path"
+    fi
+    
+    success "ワークツリーを追加しました"
+    echo $worktree_path
+}
+
+# ワークツリー削除
+remove_worktree() {
+    local branch=$1
+    
+    if [[ -z $branch ]]; then
+        # 引数がない場合はskでファジーファインディング
+        branch=$(list_worktrees "--oneline" | sk --prompt="Remove worktree> ")
+        if [[ -z $branch ]]; then
+            info "キャンセルされました"
+            return 0
+        fi
+    fi
+    
+    if ! git worktree list --porcelain | grep -q "^branch refs/heads/$branch$"; then
+        error "指定されたブランチが存在しません: $branch"
+    fi
+    
+    # 確認
+    echo -n "ワークツリーを削除しますか? [$branch] (y/N): "
+    read -r confirm
+    if [[ $confirm != [yY] ]]; then
+        info "キャンセルされました"
+        return 0
+    fi
+    
+    git worktree remove "$branch"
+    success "ワークツリーを削除しました: $branch"
+}
+
+# ワークツリーに移動
+switch_worktree() {
+    local branch=$1
+    
+    if [[ -z $branch ]]; then
+        # 引数がない場合はskでファジーファインディング
+        branch=$(list_worktrees "--oneline" | sk --prompt="Switch to worktree> ")
+        if [[ -z $branch ]]; then
+            info "キャンセルされました"
+            return 0
+        fi
+    fi
+    
+    if ! git worktree list --porcelain | grep -q "^branch refs/heads/$branch$"; then
+        error "指定されたブランチが存在しません: $branch"
+    fi
+    
+    local wt_path=$(git worktree list | grep "\[$branch\]" | cut -d' ' -f1)
+    echo $wt_path
+}
+
+# ワークツリーをクリーンアップ
+prune_worktrees() {
+    info "削除されたワークツリーをクリーンアップ中..."
+    git worktree prune
+    success "クリーンアップが完了しました"
+}
+
+# 全ワークツリーの状態表示
+show_status() {
+    info "全ワークツリーの状態:"
+    
+    git worktree list --porcelain | while IFS= read -r line; do
+        if [[ $line =~ ^worktree ]]; then
+            current_path=${line#worktree }
+            echo -e "\n${GREEN}${ICON_FOLDER} $current_path${NC}"
+            
+            # そのワークツリーのGit状態をチェック
+            if [[ -d $current_path ]]; then
+                (cd "$current_path" && {
+                    # ブランチ情報
+                    branch=$(git branch --show-current 2>/dev/null || echo "detached")
+                    echo -e "  ${BLUE}${ICON_BRANCH} ブランチ: $branch${NC}"
+                    
+                    # 変更状況
+                    if git diff --quiet && git diff --cached --quiet; then
+                        echo -e "  ${GREEN}${ICON_CLEAN} クリーン${NC}"
+                    else
+                        echo -e "  ${YELLOW}${ICON_MODIFIED} 変更あり${NC}"
+                        
+                        # 詳細な状態
+                        modified=$(git diff --name-only | wc -l)
+                        staged=$(git diff --cached --name-only | wc -l)
+                        
+                        if [[ $modified -gt 0 ]]; then
+                            echo -e "    ${YELLOW}${ICON_FILE} 変更ファイル: $modified${NC}"
+                        fi
+                        if [[ $staged -gt 0 ]]; then
+                            echo -e "    ${GREEN}${ICON_STAGED} ステージ済み: $staged${NC}"
+                        fi
+                    fi
+                    
+                    # アンプッシュコミット
+                    if git log --oneline @{u}.. 2>/dev/null | head -1 > /dev/null; then
+                        unpushed=$(git log --oneline @{u}.. 2>/dev/null | wc -l)
+                        if [[ $unpushed -gt 0 ]]; then
+                            echo -e "  ${YELLOW}${ICON_PUSH} 未プッシュ: $unpushed commits${NC}"
+                        fi
+                    fi
+                })
+            else
+                error "ディレクトリが存在しません: $current_path"
+            fi
+        fi
+    done
+}
+
+# メイン処理
+main() {
+    check_git_repo
+    
+    case ${1:-help} in
+        list|ls)
+            list_worktrees "${2:-}"
+            ;;
+        add)
+            add_worktree "${2:-}"
+            ;;
+        remove|rm)
+            remove_worktree "${2:-}"
+            ;;
+        switch|sw)
+            switch_worktree "${2:-}"
+            ;;
+        prune)
+            prune_worktrees
+            ;;
+        status)
+            show_status
+            ;;
+        help|--help|-h)
+            show_help
+            ;;
+        *)
+            error "不明なコマンド: $1\n$(show_help)"
+            ;;
+    esac
+}
+
+# スクリプト実行
+main "$@"
+
