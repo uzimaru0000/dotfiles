@@ -1,6 +1,15 @@
 #!/bin/sh
 set -e
 
+cat <<'BANNER'
+     _       _    __ _ _
+  __| | ___ | |_ / _(_) | ___  ___
+ / _` |/ _ \| __| |_| | |/ _ \/ __|
+| (_| | (_) | |_|  _| | |  __/\__ \
+ \__,_|\___/ \__|_| |_|_|\___||___/
+
+BANNER
+
 # macOS only
 if [ "$(uname)" != "Darwin" ]; then
   echo "This script is for macOS only."
@@ -27,6 +36,13 @@ fi
 
 # Install stow
 brew install stow
+
+# Clone dotfiles
+DOTFILES_DIR="$HOME/.dotfiles"
+if [ ! -d "$DOTFILES_DIR" ]; then
+  git clone https://github.com/uzimaru/.dotfiles.git "$DOTFILES_DIR"
+fi
+cd "$DOTFILES_DIR"
 
 # Apply dotfiles
 make stow
