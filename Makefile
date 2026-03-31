@@ -1,4 +1,4 @@
-PACKAGES := git fish starship gh gitui bin brew ghostty tmux lazygit mise
+PACKAGES := git fish starship gh gitui bin brew ghostty tmux lazygit mise nvim
 
 .PHONY: all stow unstow restow brew
 

@@ -32,6 +32,7 @@ curl -fsSL https://raw.githubusercontent.com/uzimaru/.dotfiles/main/init.sh | sh
 ├── gitui/      # GitUI 設定 (~/.config/gitui/)
 ├── lazygit/    # LazyGit 設定 (~/.config/lazygit/)
 ├── mise/       # mise ランタイム管理 (~/.config/mise/)
+├── nvim/       # Neovim 設定 (~/.config/nvim/)
 ├── starship/   # Starship プロンプト設定 (~/.config/starship.toml)
 ├── tmux/       # tmux 設定 (~/.config/tmux/)
 ├── init.sh     # 初期セットアップスクリプト
