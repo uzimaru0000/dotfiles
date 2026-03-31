@@ -27,9 +27,13 @@ curl -fsSL https://raw.githubusercontent.com/uzimaru/.dotfiles/main/init.sh | sh
 ├── brew/       # Homebrew Brewfile (~/.Brewfile)
 ├── fish/       # Fish shell 設定 (~/.config/fish/)
 ├── gh/         # GitHub CLI 設定 (~/.config/gh/)
+├── ghostty/    # Ghostty ターミナル設定 (~/.config/ghostty/)
 ├── git/        # Git 設定 (~/.gitconfig, ~/.gitignore_global)
 ├── gitui/      # GitUI 設定 (~/.config/gitui/)
+├── lazygit/    # LazyGit 設定 (~/.config/lazygit/)
+├── mise/       # mise ランタイム管理 (~/.config/mise/)
 ├── starship/   # Starship プロンプト設定 (~/.config/starship.toml)
+├── tmux/       # tmux 設定 (~/.config/tmux/)
 ├── init.sh     # 初期セットアップスクリプト
 └── Makefile    # stow コマンドのラッパー
 ```

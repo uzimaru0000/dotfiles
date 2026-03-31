@@ -1,0 +1,9 @@
+[settings]
+idiomatic_version_file_enable_tools = ["python"]
+
+[tools]
+bun = "latest"
+go = "1.23.0"
+node = "24"
+rust = "1.92.0"
+uv = "latest"

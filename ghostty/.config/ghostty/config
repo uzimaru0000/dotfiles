@@ -1,0 +1,16 @@
+shell-integration = fish
+font-family = "Moralerspace Krypton NF"
+font-family-bold = "Moralerspace Krypton NF"
+theme = nord
+window-padding-x = 12
+window-inherit-working-directory = false
+font-size = 18.0
+cursor-style = block
+shell-integration-features = no-cursor
+cursor-style-blink = false
+quick-terminal-position = right
+quick-terminal-animation-duration = 0.1
+quick-terminal-screen = mouse
+keybind = global:cmd+`=toggle_quick_terminal
+keybind = shift+enter=text:\n
+

@@ -1,0 +1,9 @@
+gui:
+  nerdFontsVersion: "3"
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+  branchLogCmd: git log --graph --color=always --pretty=format:'%C(yellow)%h%C(reset) %C(green)<%cr>%C(reset)%C(bold blue)%d%C(reset)%n  - %s %C(cyan)by %an%C(reset)%n' --abbrev-commit {{branchName}} --
+  allBranchesLogCmd: git log --graph --color=always --pretty=format:'%C(yellow)%h%C(reset) %C(green)<%cr>%C(reset)%C(bold blue)%d%C(reset)%n  - %s %C(cyan)by %an%C(reset)%n' --abbrev-commit
+
