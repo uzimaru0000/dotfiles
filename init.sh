@@ -50,4 +50,7 @@ make stow
 # Install packages
 brew bundle --no-lock --file=~/.Brewfile
 
+# Apply macOS system preferences
+sh "$DOTFILES_DIR/macos.sh"
+
 echo "Done!"
