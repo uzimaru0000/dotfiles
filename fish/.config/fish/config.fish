@@ -46,10 +46,7 @@ alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
 
 source ~/.config/fish/functions/ghq.fish
 
-# pnpm
-set -gx PNPM_HOME "/Users/uzimaru/Library/pnpm"
-set -gx PATH "$PNPM_HOME" $PATH
-# pnpm end
+
 
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
