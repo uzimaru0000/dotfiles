@@ -2,7 +2,7 @@
 [user]
 	name = uzimaru0000
 	email = shuji365630@gmail.com
-	signingkey = 882B66540430C749
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEL5cjQnYjkAT06haprhM7ujec8I2zKzENCBpyvOSz5K
 [core]
 	editor = nvim
 	pager = delta
@@ -25,6 +25,8 @@
 [tag]
 	gpgsign = true
 [gpg]
-	program = /opt/homebrew/bin/gpg
+	format = ssh
 [init]
 	defaultBranch = main
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
