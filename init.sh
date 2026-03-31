@@ -48,7 +48,7 @@ cd "$DOTFILES_DIR"
 make stow
 
 # Install packages
-brew bundle --no-lock --file=~/.Brewfile
+brew bundle --file=~/.Brewfile
 
 # Apply macOS system preferences
 sh "$DOTFILES_DIR/macos.sh"

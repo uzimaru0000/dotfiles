@@ -14,4 +14,4 @@ restow:
 	@for pkg in $(PACKAGES); do stow -Rv $$pkg; done
 
 brew:
-	brew bundle --no-lock --file=~/.Brewfile
+	brew bundle --file=~/.Brewfile
