@@ -8,6 +8,7 @@ tap "uzimaru0000/tap"
 # === Shell & Prompt ===
 brew "fish"
 brew "starship"
+brew "tmux"
 
 # === Editor ===
 brew "neovim"
@@ -38,6 +39,7 @@ brew "yq"
 
 # === Version Management ===
 brew "asdf"
+brew "mise"
 brew "nvm"
 brew "pyenv"
 brew "pyenv-virtualenv"
