@@ -30,11 +30,6 @@ set -x PATH $HOME/.bun/bin $PATH
 set -Ux VOLTA_HOME "$HOME/.volta"
 set -Ux fish_user_paths "$VOLTA_HOME/bin" $fish_user_paths
 
-# stack.inc
-set -x GOOGLE_CLOUD_PROJECT appify-server-dev
-set -x APPIFY_SERVER /Users/uzimaru/ghq/github.com/builtbystack/appify-server
-set -x PATH $APPIFY_SERVER/scripts $APPIFY_SERVER/scripts/lib $PATH
-set -x API_ENV_YAML $APPIFY_SERVER/mobilevip/entrypoint/deploy/api/$GOOGLE_CLOUD_PROJECT-env.yaml
 
 fish_vi_key_bindings
 
