@@ -5,13 +5,13 @@ PACKAGES := git fish starship gh gitui bin brew ghostty tmux lazygit mise nvim
 all: stow
 
 stow:
-	@for pkg in $(PACKAGES); do stow -v $$pkg; done
+	@for pkg in $(PACKAGES); do stow --no-folding -v $$pkg; done
 
 unstow:
 	@for pkg in $(PACKAGES); do stow -Dv $$pkg; done
 
 restow:
-	@for pkg in $(PACKAGES); do stow -Rv $$pkg; done
+	@for pkg in $(PACKAGES); do stow --no-folding -Rv $$pkg; done
 
 brew:
 	brew bundle --file=~/.Brewfile
