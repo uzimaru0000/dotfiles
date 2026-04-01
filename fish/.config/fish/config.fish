@@ -25,6 +25,7 @@ set -gx PATH $PNPM_HOME $PATH
 set -gx PATH $HOME/.deno/bin $PATH
 set -gx PATH $HOME/.local/bin $PATH
 set -x PATH $HOME/.bun/bin $PATH
+set -x PATH $HOME/.vite-plus/bin $PATH
 
 
 set -Ux VOLTA_HOME "$HOME/.volta"
