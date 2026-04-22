@@ -9,7 +9,7 @@ set -x ELM_HOME $HOME/.elm
 set -x XDG_CONFIG_HOME $HOME/.config
 set -x LSCOLORS gxfxcxdxbxegedabagacad
 set -U fish_user_paths $fish_user_paths $HOME/.cargo/bin
-set -x EDITOR vim
+set -x EDITOR nvim
 eval (/opt/homebrew/bin/brew shellenv)
 
 # tmux 自動起動 (tmux 内・VSCode ターミナル・非対話シェルではスキップ)
@@ -56,7 +56,7 @@ starship init fish | source
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/uzimaru/google-cloud-sdk/path.fish.inc' ]; . '/Users/uzimaru/google-cloud-sdk/path.fish.inc'; end
-~/.local/bin/mise activate fish | source
+mise activate fish | source
 
 # Added by Antigravity
 fish_add_path /Users/uzimaru/.antigravity/antigravity/bin
