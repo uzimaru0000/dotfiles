@@ -1,6 +1,5 @@
 shell-integration = fish
-font-family = Monaspace Krypton
-font-family-bold = Moralerspace Krypton
+font-family = Moralerspace Krypton
 theme = nord
 window-padding-x = 12
 window-inherit-working-directory = false
