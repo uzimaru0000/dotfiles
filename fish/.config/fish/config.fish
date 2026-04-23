@@ -13,8 +13,9 @@ set -x EDITOR nvim
 eval (/opt/homebrew/bin/brew shellenv)
 
 # tmux 自動起動 (tmux 内・VSCode ターミナル・非対話シェルではスキップ)
+# 固定 session 名 + attach-or-create で常に 1 session に集約する
 if status is-interactive; and not set -q TMUX; and not set -q VSCODE_RESOLVING_ENVIRONMENT; and not set -q SSH_CONNECTION
-    exec tmux new-session -s (tmux_session_name) -c ~
+    exec tmux new-session -A -s main -c ~
 end
 
 set -x LIBRARY_PATH $LIBRARY_PATH (brew --prefix)/lib
