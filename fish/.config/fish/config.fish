@@ -50,8 +50,6 @@ source ~/.config/fish/functions/ghq.fish
 
 
 
-source /opt/homebrew/opt/asdf/libexec/asdf.fish
-
 starship init fish | source
 
 
@@ -61,3 +59,4 @@ mise activate fish | source
 
 # Added by Antigravity
 fish_add_path /Users/uzimaru/.antigravity/antigravity/bin
+
