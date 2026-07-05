@@ -8,7 +8,7 @@ tap "uzimaru0000/tap"
 # === Shell & Prompt ===
 brew "fish"
 brew "starship"
-brew "tmux"
+brew "herdr"
 
 # === Editor ===
 brew "neovim"

@@ -1,0 +1,21 @@
+# ====================
+# 基本設定
+# ====================
+
+onboarding = false
+
+[theme]
+name = "nord"
+
+# ====================
+# キーバインド
+# ====================
+# ペイン移動 (prefix+h/j/k/l)・新規タブ (prefix+c)・コピーモード (prefix+[)・
+# ズーム (prefix+z) はデフォルトのまま tmux 時代の操作と一致する
+# リサイズは prefix+r でリサイズモードに入る
+
+[keys]
+prefix = "ctrl+a"
+# tmux の | / - と同じ分割キー
+split_vertical = "prefix+|"
+split_horizontal = "prefix+minus"

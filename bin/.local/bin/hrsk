@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+session=$(herdr session list --json 2>/dev/null | jq -r '.sessions[].name' | sk --prompt='herdr session> ')
+
+if [ -n "$session" ]; then
+    herdr session attach "$session"
+fi

@@ -30,6 +30,7 @@ curl -fsSL https://raw.githubusercontent.com/uzimaru/.dotfiles/main/init.sh | sh
 ├── ghostty/    # Ghostty ターミナル設定 (~/.config/ghostty/)
 ├── git/        # Git 設定 (~/.gitconfig, ~/.gitignore_global)
 ├── gitui/      # GitUI 設定 (~/.config/gitui/)
+├── herdr/      # herdr 設定 (~/.config/herdr/)
 ├── lazygit/    # LazyGit 設定 (~/.config/lazygit/)
 ├── mise/       # mise ランタイム管理 (~/.config/mise/)
 ├── nvim/       # Neovim 設定 (~/.config/nvim/)
