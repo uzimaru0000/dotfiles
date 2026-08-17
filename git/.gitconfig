@@ -2,7 +2,7 @@
 [user]
 	name = uzimaru0000
 	email = shuji365630@gmail.com
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEL5cjQnYjkAT06haprhM7ujec8I2zKzENCBpyvOSz5K
+	signingkey = /Users/uzimaru/.ssh/id_git_sign
 [core]
 	editor = nvim
 	pager = delta
@@ -29,4 +29,13 @@
 [init]
 	defaultBranch = main
 [gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	program = /Users/uzimaru/.local/bin/ssh-sign
+	allowedSignersFile = /Users/uzimaru/.config/git/allowed_signers
+[includeIf "gitdir:**/.git/worktrees/"]
+	path = ~/.config/git/agent-worktree.gitconfig
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

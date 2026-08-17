@@ -1,0 +1,45 @@
+#!/bin/sh
+# Secure Enclave に Git コミット署名鍵をセットアップする
+# 対話ターミナルで実行すること (PIN プロンプトが出たらそのまま Enter)
+# 参考: https://www.mizdra.net/entry/2026/08/07/101542
+set -e
+
+KEY="$HOME/.ssh/id_git_sign"
+LABEL="git-sign"
+
+if [ -f "$KEY" ]; then
+  echo "既にセットアップ済み: $KEY"
+  exit 0
+fi
+
+# 1. Secure Enclave に鍵を作成 (未作成の場合のみ)
+if ! sc_auth list-ctk-identities | grep -q "$LABEL"; then
+  sc_auth create-ctk-identity -l "$LABEL" -k p-256-ne -t none
+  echo "Secure Enclave に鍵を作成しました"
+fi
+
+# 2. SSH 鍵ファイルとしてエクスポート
+tmp="$(mktemp -d)"
+cd "$tmp"
+echo "PIN プロンプトが出たらそのまま Enter を押してください"
+ssh-keygen -w /usr/lib/ssh-keychain.dylib -K -N ""
+mv id_ecdsa_sk_rk "$KEY"
+mv id_ecdsa_sk_rk.pub "$KEY.pub"
+chmod 600 "$KEY"
+echo "エクスポート完了: $KEY"
+
+# 3. 署名が通るか検証
+echo "test" | "$HOME/.local/bin/ssh-sign" -Y sign -n git -f "$KEY" > /dev/null
+echo "署名テスト OK"
+
+# 4. GitHub に署名鍵として登録
+if gh ssh-key add "$KEY.pub" --type signing --title "git-sign ($(hostname -s))" 2>/dev/null; then
+  echo "GitHub に署名鍵を登録しました"
+else
+  echo "gh での登録に失敗しました (要 admin:ssh_signing_key スコープ)"
+  echo "  gh auth refresh -h github.com -s admin:ssh_signing_key してから再実行するか、"
+  echo "  https://github.com/settings/keys に以下を Signing Key として手動登録してください:"
+  cat "$KEY.pub"
+fi
+
+echo "done"
